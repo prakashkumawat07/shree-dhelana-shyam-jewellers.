@@ -36,6 +36,10 @@
       <button data-page="orders">📦 <span>Orders</span></button>
       <button data-page="customers">👥 <span>Customers</span></button>
       <button data-page="offers">🏷️ <span>Offers</span></button>
+      <button data-page="coupons">🎟️ <span>Coupons</span></button>
+      <button data-page="rates">📈 <span>Metal Rates</span></button>
+      <button data-page="reports">📊 <span>Reports</span></button>
+      <button data-page="business">💬 <span>Reviews & Requests</span></button>
       <button data-page="messages">✉️ <span>Messages</span></button>
       <button data-page="settings">⚙️ <span>Admin Settings</span></button>
       <a href="/" target="_blank">🌐 <span>View Website</span></a>
@@ -87,6 +91,11 @@
         <div class="panel"><div id="messagesTable"></div></div>
       </section>
 
+      <section class="page" id="page-coupons"><div class="page-title"><div><h2>Coupons</h2><p>Create discount coupon codes.</p></div></div><div class="panel"><form id="couponForm" class="inline-admin-form"><input name="code" placeholder="Code" required><select name="type"><option value="percent">Percent</option><option value="flat">Flat ₹</option></select><input name="value" type="number" placeholder="Value" required><input name="expiresAt" type="date"><button class="btn btn-gold">Add Coupon</button></form><div id="couponsList"></div></div></section>
+      <section class="page" id="page-rates"><div class="page-title"><div><h2>Gold & Silver Rates</h2><p>Update today's metal rates displayed on the store.</p></div></div><div class="panel"><form id="ratesForm" class="inline-admin-form"><input name="gold22k" type="number" placeholder="22K Gold / 10g"><input name="gold24k" type="number" placeholder="24K Gold / 10g"><input name="silver" type="number" placeholder="Silver / kg"><button class="btn btn-gold">Update Rates</button></form><div id="ratesMsg"></div></div></section>
+      <section class="page" id="page-reports"><div class="page-title"><div><h2>Sales Reports</h2><p>Revenue, best sellers and low-stock alerts.</p></div><div><a class="btn" href="/api/admin/export/orders" id="exportOrders">Export Orders CSV</a></div></div><div class="stats" id="reportStats"></div><div class="panel" id="reportsPanel"></div></section>
+      <section class="page" id="page-business"><div class="page-title"><div><h2>Reviews & Business Requests</h2><p>Approve reviews and manage appointments/custom jewellery enquiries.</p></div></div><div class="panel" id="businessPanel"></div></section>
+
       <section class="page" id="page-settings">
         <div class="page-title"><div><h2>Admin Settings</h2><p>Change User ID, password and recovery code.</p></div></div>
         <div class="panel settings-panel">
@@ -121,9 +130,16 @@
       <input name="name" placeholder="Product name" required>
       <select name="category"><option>Gold</option><option>Silver</option></select>
       <input name="price" type="number" min="0" placeholder="Price ₹" required>
+      <input name="oldPrice" type="number" min="0" placeholder="Old price ₹">
       <input name="discount" type="number" min="0" max="100" placeholder="Discount %">
+      <input name="stock" type="number" min="0" placeholder="Stock quantity">
+      <input name="weight" type="number" min="0" step="0.01" placeholder="Weight (grams)">
+      <input name="makingCharges" type="number" min="0" placeholder="Making charges ₹">
       <input name="purity" placeholder="Purity e.g. 22K">
       <input name="badge" placeholder="Badge e.g. Bestseller">
+      <input name="sizes" placeholder="Sizes, comma separated">
+      <textarea name="description" rows="3" placeholder="Product description"></textarea>
+      <select name="active"><option value="true">Available</option><option value="false">Hidden / Out of stock</option></select>
       <select name="icon"><option value="ring">Ring</option><option value="necklace">Necklace</option><option value="bridal">Bridal</option><option value="bangles">Bangles</option><option value="earrings">Earrings</option><option value="silver">Silver</option></select>
       <div class="form-actions"><button type="button" class="btn" data-modal="productModal">Cancel</button><button class="btn btn-gold" type="submit">Save Product</button></div>
     </form>
@@ -153,7 +169,6 @@
     <form id="recoverUserIdForm" class="recovery-form"><input name="recoveryCode" type="password" placeholder="Recovery code" required><button class="btn btn-gold">Recover User ID</button></form>
     <form id="resetPasswordForm" class="recovery-form hidden"><input name="userId" placeholder="Admin User ID" required><input name="recoveryCode" type="password" placeholder="Recovery code" required><input name="newPassword" type="password" placeholder="New password" minlength="8" required><input name="confirmPassword" type="password" placeholder="Confirm password" minlength="8" required><button class="btn btn-gold">Reset Password</button></form>
     <div id="recoveryMsg" class="settings-msg"></div>
-    <p class="recovery-hint">Initial recovery code: <b>Prakash-Recovery@916</b></p>
   </div>
 </div>
 
