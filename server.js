@@ -65,8 +65,8 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "4mb" }));
+app.use(express.urlencoded({ extended: true, limit: "4mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/products", (req, res) => {
@@ -227,7 +227,7 @@ app.get("/api/admin/products", requireAdmin, (req, res) => {
 });
 
 app.post("/api/admin/products", requireAdmin, (req, res) => {
-  const { name, category, price, purity, badge, icon, discount } = req.body;
+  const { name, category, price, purity, badge, icon, discount, image } = req.body;
   if (!name || !category || !price) return res.status(400).json({ message: "Name, category and price are required." });
   const data = readData();
   const product = {
@@ -238,7 +238,8 @@ app.post("/api/admin/products", requireAdmin, (req, res) => {
     purity: String(purity || ""),
     badge: String(badge || "New"),
     icon: String(icon || "ring"),
-    discount: Number(discount || 0)
+    discount: Number(discount || 0),
+    image: typeof image === "string" && /^data:image\/(jpeg|png|webp);base64,/.test(image) ? image : ""
   };
   data.products.unshift(product);
   writeData(data);
@@ -250,7 +251,7 @@ app.put("/api/admin/products/:id", requireAdmin, (req, res) => {
   const product = data.products.find(p => p.id === req.params.id);
   if (!product) return res.status(404).json({ message: "Product not found." });
 
-  const allowed = ["name","category","price","purity","badge","icon","discount"];
+  const allowed = ["name","category","price","purity","badge","icon","discount","image"];
   allowed.forEach(k => {
     if (req.body[k] !== undefined) product[k] = k === "price" || k === "discount" ? Number(req.body[k]) : String(req.body[k]);
   });
