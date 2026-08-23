@@ -182,5 +182,7 @@ $("#searchBtn").onclick=()=>{
 };
 
 if(state.user) $("#accountBtn").textContent="Account";
+$("#appointmentForm, #customRequestForm").forEach(form=>form.querySelectorAll("input,textarea").forEach(input=>input.addEventListener("focus",()=>{})));
+$("[data-footer-filter]").forEach(link=>link.onclick=()=>{const filter=link.dataset.footerFilter;setTimeout(()=>{const button=$(`[data-product-filter="${filter}"]`);if(button)button.click()},100)});
 businessForm("#appointmentForm","/api/appointments");businessForm("#customRequestForm","/api/custom-requests");businessForm("#reviewForm","/api/reviews");
 updateCartCount();loadProducts();loadRates();loadReviews();
