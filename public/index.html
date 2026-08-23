@@ -15,6 +15,7 @@
     <div>✦ शुद्धता की गारंटी • 22K Gold • 92.5 Silver</div>
     <div class="top-contact">WhatsApp: <strong>8690843053</strong> / <strong>9119163053</strong></div>
   </div>
+  <div class="metal-rates" id="metalRates">Today's Gold & Silver rates will appear here.</div>
 
   <header class="navbar">
     <a class="brand" href="#home">
@@ -134,6 +135,16 @@
         </form>
       </div>
     </section>
+
+    <section class="services-section">
+      <div class="section-head"><div><span class="eyebrow dark">PERSONAL SERVICE</span><h2>Jewellery made <em>for you.</em></h2></div></div>
+      <div class="service-grid">
+        <form id="appointmentForm" class="service-form"><h3>Book Store Appointment</h3><input name="name" placeholder="Your name" required><input name="phone" placeholder="Phone" required><input name="date" type="date" required><textarea name="message" placeholder="What would you like to explore?"></textarea><button class="gold-btn">Request Appointment</button><div class="form-msg"></div></form>
+        <form id="customRequestForm" class="service-form"><h3>Custom Jewellery Request</h3><input name="name" placeholder="Your name" required><input name="phone" placeholder="Phone" required><select name="category"><option>Gold</option><option>Silver</option><option>Bridal</option></select><textarea name="details" placeholder="Describe design, budget, weight or occasion" required></textarea><button class="gold-btn">Send Custom Request</button><div class="form-msg"></div></form>
+        <form id="reviewForm" class="service-form"><h3>Share Your Review</h3><input name="name" placeholder="Your name" required><select name="rating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option></select><textarea name="comment" placeholder="Your experience" required></textarea><button class="gold-btn">Submit Review</button><div class="form-msg"></div></form>
+      </div>
+      <div class="reviews-grid" id="reviewsGrid"></div>
+    </section>
   </main>
 
   <footer>
@@ -179,6 +190,8 @@
       <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
       <form id="orderForm" class="order-form">
         <textarea name="address" rows="3" placeholder="Delivery address" required></textarea>
+        <input name="coupon" placeholder="Coupon code (optional)">
+        <select name="paymentMethod"><option value="COD">Cash on Delivery</option><option value="Online">Online Payment (Razorpay)</option></select>
         <button class="gold-btn" type="submit">Place Order →</button>
       </form>
       <div id="orderMsg" class="form-msg"></div>
@@ -187,5 +200,6 @@
 
   <div class="toast" id="toast"></div>
   <script src="/app.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </body>
 </html>
