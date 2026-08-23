@@ -87,3 +87,13 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoratio
 @media(max-width:900px){.service-grid,.reviews-grid{grid-template-columns:1fr}.inline-admin-form{grid-template-columns:1fr 1fr}}
 
 .footer-credit{text-align:center}.footer-credit p{margin:0 0 7px}.footer-credit span{font-family:"Cormorant Garamond",serif;font-size:14px;letter-spacing:1.2px;color:#c9a24b}.footer-credit strong{color:#f4cf63;font-style:italic;font-size:16px}
+
+.site-footer{background:linear-gradient(145deg,#160203,#2b0809);color:#fff;padding:0}
+.footer-main{display:grid;grid-template-columns:1.45fr repeat(4,1fr);gap:42px;padding:70px 6% 55px;border-bottom:1px solid rgba(255,255,255,.12)}
+.footer-about .footer-brand{justify-content:flex-start;margin-bottom:20px}.footer-about>p{max-width:300px;color:#cdbfc0;font-size:13px;line-height:1.8}
+.footer-socials{display:flex;gap:10px;margin-top:22px}.footer-socials a{width:38px;height:38px;border:1px solid rgba(244,207,99,.4);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:11px;font-weight:800;transition:.25s}.footer-socials a:hover{background:var(--gold);color:#210506;transform:translateY(-3px)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.footer-column h3{font-family:"Cormorant Garamond",serif;color:var(--gold2);font-size:19px;margin:0 0 8px}.footer-column a{color:#cdbfc0;font-size:12px;transition:.2s}.footer-column a:hover{color:#fff;padding-left:4px}.footer-column p{color:#cdbfc0;font-size:12px;line-height:1.7;margin:0}.footer-column p b{color:#fff}
+.footer-whatsapp{margin-top:8px!important;color:var(--gold2)!important;font-weight:700}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:22px 6%}.footer-bottom .footer-credit{text-align:left}.footer-bottom .footer-credit p{font-size:11px;color:#9f8d8e}.footer-legal{display:flex;gap:22px}.footer-legal a{color:#aa9899;font-size:11px}.footer-legal a:hover{color:var(--gold2)}
+@media(max-width:1100px){.footer-main{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.footer-main{grid-template-columns:1fr 1fr;padding:50px 6%;gap:35px 22px}.footer-about,.footer-contact{grid-column:1/-1}.footer-bottom{flex-direction:column;text-align:center}.footer-bottom .footer-credit{text-align:center}.footer-legal{flex-wrap:wrap;justify-content:center}}
