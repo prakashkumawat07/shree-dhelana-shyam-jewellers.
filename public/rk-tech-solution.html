@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RK Tech Solution by Prakash Kumawat - Web development, app development, website management and technology services.">
+  <title>RK Tech Solution | Web & App Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--dark:#07101f;--navy:#0d1b31;--blue:#2e7df6;--cyan:#4fd1ff;--white:#fff;--muted:#9eb0c8;--line:rgba(255,255,255,.11)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--dark);color:var(--white);font-family:"DM Sans",sans-serif}a{text-decoration:none;color:inherit}
+    .rk-nav{height:76px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,16,31,.9);backdrop-filter:blur(14px);z-index:5}.rk-brand{font-family:"Space Grotesk";font-weight:700;font-size:20px}.rk-brand span{color:var(--cyan)}.back{color:var(--muted);font-size:13px}.back:hover{color:#fff}
+    .hero{min-height:620px;padding:100px 6%;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:60px;background:radial-gradient(circle at 80% 25%,rgba(46,125,246,.25),transparent 30%),radial-gradient(circle at 15% 15%,rgba(79,209,255,.1),transparent 28%)}.eyebrow{display:inline-flex;padding:8px 12px;border:1px solid rgba(79,209,255,.35);border-radius:30px;color:var(--cyan);font-size:11px;letter-spacing:2px}.hero h1{font-family:"Space Grotesk";font-size:clamp(48px,7vw,88px);line-height:.98;margin:25px 0}.hero h1 span{background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;color:transparent}.hero p{max-width:650px;color:var(--muted);font-size:17px;line-height:1.8}.actions{display:flex;gap:12px;margin-top:32px}.primary,.secondary{padding:14px 20px;border-radius:8px;font-weight:700;font-size:13px}.primary{background:linear-gradient(90deg,var(--blue),#5e5cff);box-shadow:0 12px 30px rgba(46,125,246,.28)}.secondary{border:1px solid var(--line)}
+    .code-card{border:1px solid var(--line);border-radius:18px;padding:28px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));box-shadow:0 30px 80px rgba(0,0,0,.3)}.dots{display:flex;gap:7px}.dots i{width:9px;height:9px;border-radius:50%;background:#ff6b6b}.dots i:nth-child(2){background:#ffd166}.dots i:nth-child(3){background:#4cd97b}.code-card pre{white-space:pre-wrap;color:#a9bdd9;font:13px/1.9 monospace}.code-card strong{color:var(--cyan)}
+    section{padding:90px 6%}.section-head{text-align:center;max-width:720px;margin:0 auto 50px}.section-head h2{font:700 clamp(34px,5vw,52px)/1.1 "Space Grotesk";margin:12px}.section-head p{color:var(--muted);line-height:1.7}.services{background:var(--navy)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:30px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035);transition:.3s}.card:hover{transform:translateY(-6px);border-color:rgba(79,209,255,.45)}.card .icon{font-size:26px}.card h3{font:600 20px "Space Grotesk";margin:18px 0 10px}.card p{color:var(--muted);font-size:13px;line-height:1.7}.card ul{padding-left:17px;color:#c9d5e6;font-size:12px;line-height:2}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.about h2{font:700 clamp(36px,5vw,58px)/1.1 "Space Grotesk";margin:0 0 20px}.about p{color:var(--muted);line-height:1.8}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.stat{padding:25px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}.stat b{display:block;font:700 28px "Space Grotesk";color:var(--cyan)}.stat span{font-size:12px;color:var(--muted)}
+    .contact{background:linear-gradient(120deg,#102342,#07101f)}.contact-box{max-width:1000px;margin:auto;padding:50px;border:1px solid var(--line);border-radius:20px;text-align:center;background:rgba(255,255,255,.04)}.contact-box h2{font:700 clamp(34px,5vw,52px) "Space Grotesk";margin:0 0 15px}.contact-box p{color:var(--muted)}.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}.contact-links a{padding:13px 18px;border:1px solid var(--line);border-radius:8px}.contact-links a:first-child{background:#19a85b;border-color:#19a85b}
+    footer{padding:25px 6%;display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);color:#71849c;font-size:11px}.signature{color:#9eb0c8}.signature b{color:var(--cyan)}
+    @media(max-width:900px){.hero,.about{grid-template-columns:1fr}.hero{padding-top:70px}.grid{grid-template-columns:1fr 1fr}.code-card{display:none}}@media(max-width:600px){.rk-nav{padding:0 5%}.hero,section{padding-left:5%;padding-right:5%}.grid{grid-template-columns:1fr}.contact-box{padding:35px 20px}.actions,footer{flex-direction:column}.hero h1{font-size:48px}}
+  </style>
+</head>
+<body>
+  <nav class="rk-nav"><a class="rk-brand" href="/rk-tech-solution.html">RK <span>TECH</span> SOLUTION</a><a class="back" href="/">← Back to Jewellery Store</a></nav>
+  <main>
+    <section class="hero">
+      <div><span class="eyebrow">DESIGN • DEVELOP • GROW</span><h1>Digital solutions that <span>move business forward.</span></h1><p>RK Tech Solution helps businesses build a strong digital presence through professional websites, modern applications, reliable management and practical technology support.</p><div class="actions"><a class="primary" href="https://wa.me/918690843053" target="_blank" rel="noopener">Start Your Project →</a><a class="secondary" href="#services">Explore Services</a></div></div>
+      <div class="code-card"><div class="dots"><i></i><i></i><i></i></div><pre><strong>RK_TECH_SOLUTION</strong> = {
+  founder: "Prakash Kumawat",
+  services: [
+    "Web Development",
+    "App Development",
+    "Website Management",
+    "Tech Solutions"
+  ],
+  commitment: "Quality + Support"
+};</pre></div>
+    </section>
+    <section class="services" id="services"><div class="section-head"><span class="eyebrow">WHAT WE DO</span><h2>Technology services for modern businesses</h2><p>From idea and design to launch and ongoing support—everything needed for a dependable digital product.</p></div><div class="grid">
+      <article class="card"><div class="icon">◫</div><h3>Web Development</h3><p>Fast, responsive and attractive websites built for your brand and customers.</p><ul><li>Business & portfolio websites</li><li>E-commerce stores</li><li>Admin dashboards</li><li>Custom web applications</li></ul></article>
+      <article class="card"><div class="icon">▣</div><h3>App Development</h3><p>User-friendly mobile and web applications designed around real business needs.</p><ul><li>Android applications</li><li>Progressive Web Apps</li><li>Business management apps</li><li>API integration</li></ul></article>
+      <article class="card"><div class="icon">⚙</div><h3>Website Management</h3><p>Reliable ongoing support so your digital presence stays updated and secure.</p><ul><li>Content and product updates</li><li>Performance monitoring</li><li>Backup and maintenance</li><li>Bug fixing</li></ul></article>
+      <article class="card"><div class="icon">⌁</div><h3>UI/UX Design</h3><p>Clean, modern interfaces that make your product easier and more enjoyable to use.</p><ul><li>Responsive layouts</li><li>Landing pages</li><li>Design systems</li><li>Interface improvements</li></ul></article>
+      <article class="card"><div class="icon">☁</div><h3>Hosting & Deployment</h3><p>Technical setup and deployment for smooth, reliable access to your product.</p><ul><li>Domain and hosting setup</li><li>Cloud deployment</li><li>Database configuration</li><li>SSL and environment setup</li></ul></article>
+      <article class="card"><div class="icon">◉</div><h3>Technical Support</h3><p>Practical help for website, software and day-to-day technology requirements.</p><ul><li>Technical consultation</li><li>Feature development</li><li>Third-party integration</li><li>Issue diagnosis</li></ul></article>
+    </div></section>
+    <section class="about"><div><span class="eyebrow">ABOUT RK TECH</span><h2>Built with clarity, care and reliable support.</h2><p>RK Tech Solution is led by <b>Prakash Kumawat</b>. We focus on understandable technology, professional design and dependable solutions that help local businesses, professionals and growing brands succeed online.</p><p>Every project is approached with attention to business goals, user experience, performance and long-term maintainability.</p></div><div class="stats"><div class="stat"><b>Web</b><span>Modern responsive development</span></div><div class="stat"><b>App</b><span>Business-focused applications</span></div><div class="stat"><b>24×7</b><span>Enquiry availability</span></div><div class="stat"><b>100%</b><span>Commitment to quality</span></div></div></section>
+    <section class="contact" id="contact"><div class="contact-box"><span class="eyebrow">LET'S WORK TOGETHER</span><h2>Have a project in mind?</h2><p>Contact RK Tech Solution for website, application, management or technical support requirements.</p><div class="contact-links"><a href="https://wa.me/918690843053" target="_blank" rel="noopener">WhatsApp: +91 86908 43053</a><a href="tel:+919119163053">Call: +91 91191 63053</a></div></div></section>
+  </main>
+  <footer><span>© 2026 RK Tech Solution. All rights reserved.</span><span class="signature">Founded & Developed by <b>Prakash Kumawat</b></span></footer>
+</body>
+</html>
