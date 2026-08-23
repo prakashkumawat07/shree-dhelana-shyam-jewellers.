@@ -44,12 +44,34 @@ function tableOrders(list,full=true){
 }
 async function loadProducts(){
  const ps=await api("/api/admin/products");
- $("#productsTable").innerHTML=ps.length?`<table class="table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Discount</th><th>Purity</th><th>Actions</th></tr></thead><tbody>${ps.map(p=>`<tr><td><strong>${esc(p.name)}</strong><br><span class="muted">${esc(p.badge||"")}</span></td><td>${esc(p.category)}</td><td>${money(p.price)}</td><td>${Number(p.discount||0)}%</td><td>${esc(p.purity)}</td><td><button class="btn btn-small btn-gold" data-edit-product="${p.id}">Edit</button> <button class="btn btn-small btn-danger" data-delete-product="${p.id}">Delete</button></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No products.</div>';
+ $("#productsTable").innerHTML=ps.length?`<table class="table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Discount</th><th>Purity</th><th>Actions</th></tr></thead><tbody>${ps.map(p=>`<tr><td><div class="admin-product-cell">${p.image?`<img src="${p.image}" alt="">`:""}<div><strong>${esc(p.name)}</strong><br><span class="muted">${esc(p.badge||"")}</span></div></div></td><td>${esc(p.category)}</td><td>${money(p.price)}</td><td>${Number(p.discount||0)}%</td><td>${esc(p.purity)}</td><td><button class="btn btn-small btn-gold" data-edit-product="${p.id}">Edit</button> <button class="btn btn-small btn-danger" data-delete-product="${p.id}">Delete</button></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No products.</div>';
  $$("[data-edit-product]").forEach(b=>b.onclick=async()=>editProduct(b.dataset.editProduct));
  $$("[data-delete-product]").forEach(b=>b.onclick=async()=>{if(!confirm("Delete this product?"))return;try{await api("/api/admin/products/"+b.dataset.deleteProduct,{method:"DELETE"});toast("Product deleted");loadProducts();loadDashboard()}catch(e){toast(e.message)}});
 }
-$("#addProductBtn").onclick=()=>{ $("#productForm").reset();$("#productForm [name=id]").value="";$("#productModalTitle").textContent="Add Product";modal("productModal") };
-async function editProduct(id){const ps=await api("/api/admin/products");const p=ps.find(x=>x.id===id);if(!p)return;const f=$("#productForm");Object.keys(p).forEach(k=>{if(f.elements[k])f.elements[k].value=p[k]});$("#productModalTitle").textContent="Update Product";modal("productModal")}
+const productImageFile=$("#productImageFile"), productImageData=$("#productImageData"), productImagePreview=$("#productImagePreview"), removeProductImage=$("#removeProductImage");
+function showProductImage(src=""){
+  productImageData.value=src;
+  productImagePreview.innerHTML=src?`<img src="${src}" alt="Product photo preview">`:"<span>No photo selected</span>";
+  removeProductImage.classList.toggle("hidden",!src);
+}
+function resizeProductImage(file){
+  return new Promise((resolve,reject)=>{
+    if(!file.type.match(/^image\/(jpeg|png|webp)$/))return reject(new Error("Please select a JPG, PNG or WebP image."));
+    if(file.size>5*1024*1024)return reject(new Error("Photo must be smaller than 5 MB."));
+    const reader=new FileReader();
+    reader.onerror=()=>reject(new Error("Could not read the selected photo."));
+    reader.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error("Invalid image file."));img.onload=()=>{
+      const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement("canvas");
+      canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+      canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
+      resolve(canvas.toDataURL("image/jpeg",.82));
+    };img.src=reader.result};reader.readAsDataURL(file);
+  });
+}
+productImageFile.onchange=async()=>{const file=productImageFile.files[0];if(!file)return;try{showProductImage(await resizeProductImage(file))}catch(err){productImageFile.value="";toast(err.message)}};
+removeProductImage.onclick=()=>{productImageFile.value="";showProductImage("")};
+$("#addProductBtn").onclick=()=>{ $("#productForm").reset();$("#productForm [name=id]").value="";showProductImage("");$("#productModalTitle").textContent="Add Product";modal("productModal") };
+async function editProduct(id){const ps=await api("/api/admin/products");const p=ps.find(x=>x.id===id);if(!p)return;const f=$("#productForm");f.reset();Object.keys(p).forEach(k=>{if(f.elements[k])f.elements[k].value=p[k]});showProductImage(p.image||"");$("#productModalTitle").textContent="Update Product";modal("productModal")}
 $("#productForm").onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));try{const id=f.id;delete f.id;await api(id?"/api/admin/products/"+id:"/api/admin/products",{method:id?"PUT":"POST",body:JSON.stringify(f)});modal("productModal",false);toast(id?"Product updated":"Product added");loadProducts();loadDashboard()}catch(err){toast(err.message)}};
 
 async function loadOrders(){const os=await api("/api/admin/orders");$("#ordersTable").innerHTML=os.length?tableOrders(os,true):'<div class="empty">No orders yet.</div>';$$("[data-status]").forEach(s=>s.onchange=async()=>{try{await api("/api/admin/orders/"+s.dataset.status+"/status",{method:"PUT",body:JSON.stringify({status:s.value})});toast("Order status updated");loadOrders();loadDashboard()}catch(e){toast(e.message)}})}
