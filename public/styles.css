@@ -79,3 +79,9 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoratio
 .remove-photo{grid-column:1/-1;justify-self:start;color:#8d1717;border-color:#d9a8a8}
 .admin-product-cell{display:flex;align-items:center;gap:10px;min-width:180px}
 .admin-product-cell img{width:48px;height:48px;border-radius:8px;object-fit:cover;border:1px solid var(--line)}
+.metal-rates{background:#fff4d5;color:#5b3705;text-align:center;padding:9px 16px;font-size:12px;border-bottom:1px solid #ead39b}
+.product-description{font-size:12px;color:var(--muted);line-height:1.5;min-height:36px;margin:8px 0}
+.stock-line{font-size:11px;color:#287a45;font-weight:700;margin-bottom:8px}.low-stock{color:#b22b22!important}.price s{font-size:11px;color:#999;font-weight:500}
+.add-btn:disabled{opacity:.45;cursor:not-allowed}
+.services-section{padding:90px 6%;background:#faf7f1}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.service-form{background:#fff;padding:28px;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}.service-form h3{font-family:"Cormorant Garamond",serif;font-size:25px;margin:0 0 5px}.service-form input,.service-form select,.service-form textarea,.inline-admin-form input,.inline-admin-form select{width:100%;padding:13px;border:1px solid var(--line);border-radius:7px;background:#fff;font:inherit}.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.review-card{background:#fff;padding:22px;border-radius:12px;border:1px solid var(--line)}.review-card div{color:var(--gold);letter-spacing:3px}.review-card p{color:var(--muted);line-height:1.6}.inline-admin-form{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}.panel h3{margin-top:25px}
+@media(max-width:900px){.service-grid,.reviews-grid{grid-template-columns:1fr}.inline-admin-form{grid-template-columns:1fr 1fr}}
