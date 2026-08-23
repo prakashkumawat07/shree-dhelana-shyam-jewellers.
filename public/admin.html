@@ -111,6 +111,14 @@
     <h3 id="productModalTitle">Add Product</h3>
     <form class="product-form" id="productForm">
       <input type="hidden" name="id">
+      <input type="hidden" name="image" id="productImageData">
+      <label class="product-photo-field">
+        <span>Product Photo</span>
+        <input id="productImageFile" type="file" accept="image/jpeg,image/png,image/webp">
+        <small>JPG, PNG or WebP • Maximum 5 MB</small>
+      </label>
+      <div class="product-photo-preview" id="productImagePreview"><span>No photo selected</span></div>
+      <button class="btn btn-small remove-photo hidden" id="removeProductImage" type="button">Remove Photo</button>
       <input name="name" placeholder="Product name" required>
       <select name="category"><option>Gold</option><option>Silver</option></select>
       <input name="price" type="number" min="0" placeholder="Price ₹" required>
