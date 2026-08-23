@@ -32,7 +32,7 @@ function productVisual(p) {
   if (p.icon === "earrings") shape += " earring-shape";
   if (p.category === "Silver") shape += " silver-shape";
   return `<div class="product-visual ${cls}">
-    <span class="badge">${p.badge}</span><button class="heart" aria-label="Wishlist">♡</button>
+    <span class="badge">${p.badge}</span><button class="heart" data-wishlist="${p.id}" aria-label="Wishlist">${state.user?.wishlist?.includes(p.id)?"♥":"♡"}</button>
     ${p.image?`<img class="product-photo" src="${p.image}" alt="${p.name}">`:`<div class="${shape}"></div>`}
   </div>`;
 }
@@ -43,13 +43,18 @@ function renderProducts(filter="All") {
     <article class="product-card">
       ${productVisual(p)}
       <div class="product-info">
-        <small>${p.purity} • ${p.category.toUpperCase()}</small>
+        <small>${p.purity} • ${p.category.toUpperCase()}${p.weight?` • ${p.weight}g`:""}</small>
         <h3>${p.name}</h3>
-        <div class="price-row"><span class="price">${money(p.price)}</span><button class="add-btn" data-add="${p.id}">ADD TO BAG +</button></div>
+        <p class="product-description">${p.description||""}</p>
+        <div class="stock-line ${Number(p.stock||0)<=3?"low-stock":""}">${Number(p.stock||0)>0?(Number(p.stock)<=3?`Only ${p.stock} left`:`In stock: ${p.stock}`):"Out of stock"}</div>
+        <div class="price-row"><span class="price">${money(p.price)}${p.oldPrice?` <s>${money(p.oldPrice)}</s>`:""}</span><button class="add-btn" data-add="${p.id}" ${Number(p.stock||0)<=0?"disabled":""}>${Number(p.stock||0)>0?"ADD TO BAG +":"OUT OF STOCK"}</button></div>
       </div>
     </article>`).join("");
   $$("#productGrid [data-add]").forEach(btn => btn.addEventListener("click", () => addToCart(btn.dataset.add)));
+  $$("#productGrid [data-wishlist]").forEach(btn => btn.addEventListener("click", () => toggleWishlist(btn.dataset.wishlist)));
 }
+
+async function toggleWishlist(id){if(!state.user){openAccount();toast("Please login to use wishlist.");return}try{const d=await api(`/api/account/${encodeURIComponent(state.user.email)}/wishlist/${id}`,{method:"POST"});state.user.wishlist=d.wishlist;localStorage.setItem("sgj_user",JSON.stringify(state.user));renderProducts();toast("Wishlist updated.")}catch(e){toast(e.message)}}
 
 function addToCart(id) {
   const product = state.products.find(p => p.id === id);
@@ -87,7 +92,7 @@ function changeQty(id, delta) {
 function removeItem(id){state.cart=state.cart.filter(i=>i.id!==id);saveCart();renderCart();}
 
 async function api(url, options={}) {
-  const res = await fetch(url,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});
+  const res = await fetch(url,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});
   const data = await res.json().catch(()=>({message:"Something went wrong."}));
   if(!res.ok) throw new Error(data.message || "Request failed");
   return data;
@@ -97,6 +102,10 @@ async function loadProducts() {
   try { state.products = await api("/api/products"); renderProducts(); }
   catch(e){ toast(e.message); }
 }
+
+async function loadRates(){try{const r=await api("/api/rates");$("#metalRates").innerHTML=r.updatedAt?`आज का भाव • 22K Gold: <b>${money(r.gold22k)}/10g</b> • 24K Gold: <b>${money(r.gold24k)}/10g</b> • Silver: <b>${money(r.silver)}/kg</b>`:"आज का Gold & Silver भाव जल्द अपडेट होगा।"}catch{}}
+async function loadReviews(){try{const rs=await api("/api/reviews");$("#reviewsGrid").innerHTML=rs.slice(0,6).map(r=>`<article class="review-card"><div>${"★".repeat(r.rating)}</div><p>${r.comment}</p><b>${r.name}</b></article>`).join("")}catch{}}
+function businessForm(id,url){$(id).onsubmit=async e=>{e.preventDefault();const msg=e.target.querySelector(".form-msg");try{const d=await api(url,{method:"POST",body:JSON.stringify(Object.fromEntries(new FormData(e.target)))});msg.textContent=d.message;e.target.reset();toast(d.message)}catch(err){msg.textContent=err.message}}}
 
 function switchAuth(mode){
   const login = mode==="login";
@@ -137,10 +146,15 @@ $("#orderForm").addEventListener("submit", async e=>{
   e.preventDefault();
   if(!state.user){closeModal("cartModal");openModal("accountModal");switchAuth("login");toast("Please login before placing an order.");return;}
   if(!state.cart.length){toast("Your bag is empty.");return;}
-  const address=new FormData(e.target).get("address");
+  const orderData=Object.fromEntries(new FormData(e.target));const address=orderData.address;
   const total=state.cart.reduce((sum,x)=>sum+x.price*x.qty,0);
   try {
-    const data=await api("/api/orders",{method:"POST",body:JSON.stringify({user:state.user,items:state.cart,total,address})});
+    let payment={};
+    if(orderData.paymentMethod==="Online"){
+      const ro=await api("/api/payments/create",{method:"POST",body:JSON.stringify({items:state.cart,coupon:orderData.coupon})});
+      payment=await new Promise((resolve,reject)=>{if(!window.Razorpay)return reject(new Error("Payment checkout could not load."));const checkout=new Razorpay({key:ro.keyId,amount:ro.amount,currency:"INR",name:"Shree Dhelana Shyam Jewellers",description:"Jewellery order",order_id:ro.id,prefill:{name:state.user.name,email:state.user.email,contact:state.user.phone},handler:r=>resolve({razorpayOrderId:r.razorpay_order_id,paymentId:r.razorpay_payment_id,paymentSignature:r.razorpay_signature}),modal:{ondismiss:()=>reject(new Error("Payment cancelled."))}});checkout.open()});
+    }
+    const data=await api("/api/orders",{method:"POST",body:JSON.stringify({user:state.user,items:state.cart,total,address,coupon:orderData.coupon,paymentMethod:orderData.paymentMethod,...payment})});
     state.cart=[];saveCart();renderCart();e.target.reset();
     $("#orderMsg").textContent=`Order ${data.order.id} confirmed!`;
     toast("Order placed successfully.");
@@ -167,4 +181,5 @@ $("#searchBtn").onclick=()=>{
 };
 
 if(state.user) $("#accountBtn").textContent="Account";
-updateCartCount();loadProducts();
+businessForm("#appointmentForm","/api/appointments");businessForm("#customRequestForm","/api/custom-requests");businessForm("#reviewForm","/api/reviews");
+updateCartCount();loadProducts();loadRates();loadReviews();
