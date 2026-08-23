@@ -1,7 +1,8 @@
 const state = {
   products: [],
   cart: JSON.parse(localStorage.getItem("sgj_cart") || "[]"),
-  user: JSON.parse(localStorage.getItem("sgj_user") || "null")
+  user: JSON.parse(localStorage.getItem("sgj_user") || "null"),
+  token: localStorage.getItem("sgj_user_token") || ""
 };
 
 const $ = (s) => document.querySelector(s);
@@ -92,7 +93,7 @@ function changeQty(id, delta) {
 function removeItem(id){state.cart=state.cart.filter(i=>i.id!==id);saveCart();renderCart();}
 
 async function api(url, options={}) {
-  const res = await fetch(url,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});
+  const res = await fetch(url,{...options,headers:{"Content-Type":"application/json",...(state.token?{Authorization:"Bearer "+state.token}:{}),...(options.headers||{})}});
   const data = await res.json().catch(()=>({message:"Something went wrong."}));
   if(!res.ok) throw new Error(data.message || "Request failed");
   return data;
@@ -127,7 +128,7 @@ $("#loginForm").addEventListener("submit", async e=>{
   e.preventDefault(); const fd=new FormData(e.target); const msg=$("#authMsg");
   try {
     const data=await api("/api/login",{method:"POST",body:JSON.stringify(Object.fromEntries(fd))});
-    state.user=data.user; localStorage.setItem("sgj_user",JSON.stringify(data.user));
+    state.user=data.user;state.token=data.token;localStorage.setItem("sgj_user",JSON.stringify(data.user));localStorage.setItem("sgj_user_token",data.token);
     $("#accountBtn").textContent="Account"; msg.textContent="Login successful."; toast("Welcome back, "+data.user.name+"!");
     setTimeout(()=>closeModal("accountModal"),700);
   } catch(err){msg.textContent=err.message}
@@ -136,7 +137,7 @@ $("#registerForm").addEventListener("submit", async e=>{
   e.preventDefault(); const fd=new FormData(e.target); const msg=$("#authMsg");
   try {
     const data=await api("/api/register",{method:"POST",body:JSON.stringify(Object.fromEntries(fd))});
-    state.user=data.user; localStorage.setItem("sgj_user",JSON.stringify(data.user));
+    state.user=data.user;state.token=data.token;localStorage.setItem("sgj_user",JSON.stringify(data.user));localStorage.setItem("sgj_user_token",data.token);
     $("#accountBtn").textContent="Account"; msg.textContent="Account created successfully."; toast("Welcome to Shree Dhelana Shyam Jewellers!");
     setTimeout(()=>closeModal("accountModal"),700);
   } catch(err){msg.textContent=err.message}
