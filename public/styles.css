@@ -116,3 +116,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoratio
 .footer-legal{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:22px}.footer-legal a{color:#9e8a8b;font-size:10px;text-decoration:none}.footer-legal a:hover{color:#f4cf63}
 @media(max-width:1180px){.footer-main{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;gap:44px 60px!important}.footer-about,.footer-contact{grid-column:auto}.footer-bottom{align-items:flex-start}}
 @media(max-width:620px){.footer-topline{font-size:9px;letter-spacing:1.8px;gap:8px}.footer-main{grid-template-columns:1fr!important;padding:44px 24px 38px!important;gap:38px!important}.footer-about,.footer-contact{grid-column:auto}.footer-about>p{max-width:none}.footer-bottom{padding:22px 24px!important;flex-direction:column!important;align-items:flex-start!important}.footer-bottom .footer-credit{text-align:left!important}.footer-legal{justify-content:flex-start;gap:18px}}
+
+/* Center footer copyright and developer signature */
+.footer-bottom{flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important}
+.footer-bottom .footer-credit{text-align:center!important}
+.footer-legal{justify-content:center!important}
