@@ -2,7 +2,7 @@ const A={key:localStorage.getItem("sgj_admin_key")||"",userId:localStorage.getIt
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const money=n=>"₹"+Number(n||0).toLocaleString("en-IN");
 async function api(url,opt={}) {
-  const res=await fetch(url,{headers:{"Content-Type":"application/json","x-admin-key":A.key,...(opt.headers||{})},...opt});
+  const res=await fetch(url,{...opt,headers:{"Content-Type":"application/json","x-admin-key":A.key,...(opt.headers||{})}});
   const data=await res.json().catch(()=>({message:"Request failed"}));
   if(!res.ok) throw new Error(data.message||"Request failed"); return data;
 }
