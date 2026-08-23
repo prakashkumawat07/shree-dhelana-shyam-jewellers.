@@ -2,6 +2,8 @@
 
 Premium jewellery storefront built with Node.js + Express.
 
+Production configuration and the new business features are documented in [PRODUCTION_SETUP.md](PRODUCTION_SETUP.md). Copy `.env.example` values into Render Environment; never commit real credentials.
+
 ## Features
 - Attractive responsive UI inspired by the supplied jewellery poster
 - Gold / Silver product catalogue
@@ -34,11 +36,6 @@ Open:
 
 `http://localhost:3000/admin.html`
 
-Default demo admin credentials:
-
-- Email: `admin@shreegelam.com`
-- Password: `Admin@123`
-
 Admin features:
 - Dashboard statistics
 - Add / edit / delete products
@@ -61,12 +58,6 @@ For a real deployment, set these environment variables:
 Do not use the demo credentials in production. For production use, also add a real database, session/JWT authentication, secure cookies, CSRF protection, rate limiting and role-based authorization.
 
 
-## Admin Credentials
+## Admin credentials
 
-User ID: `Prakash@9116`
-
-Password: `Kumawat@916`
-
-Initial recovery code: `Prakash-Recovery@916`
-
-Admin Settings can change User ID, password, and recovery code. The login screen includes Forgot User ID / Password.
+Set `ADMIN_USER_ID`, `ADMIN_PASSWORD`, `ADMIN_RECOVERY_CODE` and `ADMIN_KEY` privately in Render Environment. Never publish credentials in GitHub or display them on the login page. Admin Settings can change the User ID, password and recovery code.
