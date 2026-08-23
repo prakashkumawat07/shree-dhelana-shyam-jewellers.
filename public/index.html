@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shree Dhelana Shyam Jewellers - Gold & Silver Jewellery">
+  <title>Shree Dhelana Shyam Jewellers | Gold & Silver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <div>✦ शुद्धता की गारंटी • 22K Gold • 92.5 Silver</div>
+    <div class="top-contact">WhatsApp: <strong>8690843053</strong> / <strong>9119163053</strong></div>
+  </div>
+
+  <header class="navbar">
+    <a class="brand" href="#home">
+      <span class="brand-mark">ॐ</span>
+      <span><b>श्री ढेलाणा श्याम</b><small>JEWELLERS</small></span>
+    </a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button>
+      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Cart">🛒<span id="cartCount">0</span></button>
+      <button class="outline-btn" id="accountBtn">Login</button>
+      <a class="admin-link" href="/admin.html">Admin</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <span class="eyebrow">श्री गणेशाय नमः • श्री देव दरबार</span>
+        <h1>सोने में <em>आपकी</em><br>खूबसूरत कहानी।</h1>
+        <p>Premium gold & silver jewellery, crafted for celebrations, traditions and the moments you never forget.</p>
+        <div class="hero-buttons">
+          <a class="gold-btn" href="#products">Shop Collection <span>→</span></a>
+          <button class="text-btn" onclick="openContact()">Talk to us <span>↗</span></button>
+        </div>
+        <div class="trust-row">
+          <div><strong>22K</strong><span>Pure Gold</span></div>
+          <div><strong>92.5</strong><span>Silver</span></div>
+          <div><strong>100%</strong><span>Trust</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="glow"></div>
+        <img src="/assets/jewellery-banner.jpeg" alt="Shree Dhelana Shyam Jewellers gold and silver jewellery">
+        <div class="floating-card">
+          <span>✦</span>
+          <div><b>शुद्धता की गारंटी</b><small>Gold • Silver • Hallmark</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ticker">
+      <span>✦</span> सोने और चांदी में शुद्धता की गारंटी <span>✦</span>
+      <span>✦</span> काला पीला नहीं होगा <span>✦</span>
+      <span>✦</span> भरोसा जो पीढ़ियों तक चले <span>✦</span>
+    </section>
+
+    <section class="categories">
+      <div class="section-head">
+        <div><span class="eyebrow dark">DISCOVER</span><h2>Shop by <em>Category</em></h2></div>
+        <a href="#products">View all →</a>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" data-filter="Gold">
+          <div class="cat-icon gold">♢</div><span>Gold Jewellery</span><small>22K • 18K • 20K</small>
+        </button>
+        <button class="category-card" data-filter="Silver">
+          <div class="cat-icon silver">✦</div><span>Silver Jewellery</span><small>Italian • 92.5</small>
+        </button>
+        <button class="category-card" data-filter="Gold">
+          <div class="cat-icon bridal">♕</div><span>Bridal Collection</span><small>Made for your big day</small>
+        </button>
+        <button class="category-card" data-filter="Gold">
+          <div class="cat-icon rings">◇</div><span>Rings & Earrings</span><small>Everyday elegance</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="products-section" id="products">
+      <div class="section-head">
+        <div><span class="eyebrow dark">OUR COLLECTION</span><h2>Timeless <em>Jewellery</em></h2></div>
+        <div class="filters">
+          <button class="filter active" data-product-filter="All">All</button>
+          <button class="filter" data-product-filter="Gold">Gold</button>
+          <button class="filter" data-product-filter="Silver">Silver</button>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="story" id="about">
+      <div class="story-image"><img src="/assets/jewellery-banner.jpeg" alt="Jewellery craftsmanship"></div>
+      <div class="story-copy">
+        <span class="eyebrow dark">OUR PROMISE</span>
+        <h2>Tradition meets <em>modern luxury.</em></h2>
+        <p>At Shree Dhelana Shyam Jewellers, every piece is selected with a simple promise: honest purity, beautiful design and a shopping experience you can trust.</p>
+        <div class="promise-list">
+          <div><b>01</b><span><strong>Certified Purity</strong>Hallmarked gold & 92.5 silver.</span></div>
+          <div><b>02</b><span><strong>Personal Guidance</strong>Find the piece that feels right.</span></div>
+          <div><b>03</b><span><strong>Easy Ordering</strong>Simple online order & support.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="contact-card">
+        <div>
+          <span class="eyebrow">GET IN TOUCH</span>
+          <h2>Let’s find your <em>perfect piece.</em></h2>
+          <p>Questions about purity, design, price or an order? Our team is ready to help.</p>
+          <div class="contact-details">
+            <div><span>◉</span><div><small>WhatsApp</small><strong>8690843053 / 9119163053</strong></div></div>
+            <div><span>⌖</span><div><small>Visit us</small><strong>अहीर मोहल्ला, कुंज सती माता मंदिर के पास<br>तहसील रेलमगरा, जिला राजसमंद</strong></div></div>
+          </div>
+        </div>
+        <form id="contactForm" class="contact-form">
+          <input name="name" placeholder="Your name" required>
+          <div class="two-input"><input name="email" type="email" placeholder="Email" required><input name="phone" placeholder="Phone"></div>
+          <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
+          <button class="gold-btn" type="submit">Send Message →</button>
+          <div id="contactMsg" class="form-msg"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><span class="brand-mark">ॐ</span><div><b>श्री ढेलाणा श्याम</b><small>JEWELLERS</small></div></div>
+    <p>© 2026 Shree Dhelana Shyam Jewellers. Crafted with trust & tradition.</p>
+    <div class="footer-links"><a href="#products">Shop</a><a href="#contact">Contact</a><a href="#" onclick="openAccount();return false;">Account</a></div>
+  </footer>
+
+  <!-- Account Modal -->
+  <div class="modal-backdrop" id="accountModal">
+    <div class="modal">
+      <button class="close" data-close="accountModal">×</button>
+      <div class="modal-logo">ॐ</div>
+      <span class="eyebrow dark">WELCOME</span>
+      <h2 id="accountTitle">Welcome back</h2>
+      <p class="modal-sub" id="accountSub">Login to manage your orders and account.</p>
+      <div class="auth-tabs"><button class="active" id="loginTab">Login</button><button id="registerTab">Register</button></div>
+
+      <form id="loginForm" class="auth-form">
+        <input name="email" type="email" placeholder="Email address" required>
+        <input name="password" type="password" placeholder="Password" required minlength="6">
+        <button class="gold-btn" type="submit">Login →</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <input name="name" placeholder="Full name" required>
+        <input name="email" type="email" placeholder="Email address" required>
+        <input name="phone" placeholder="Phone number">
+        <input name="password" type="password" placeholder="Create password (6+ chars)" required minlength="6">
+        <button class="gold-btn" type="submit">Create Account →</button>
+      </form>
+      <div id="authMsg" class="form-msg"></div>
+    </div>
+  </div>
+
+  <!-- Cart / Order Modal -->
+  <div class="modal-backdrop" id="cartModal">
+    <div class="modal cart-modal">
+      <button class="close" data-close="cartModal">×</button>
+      <span class="eyebrow dark">YOUR BAG</span>
+      <h2>Your <em>Order</em></h2>
+      <div id="cartItems"></div>
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+      <form id="orderForm" class="order-form">
+        <textarea name="address" rows="3" placeholder="Delivery address" required></textarea>
+        <button class="gold-btn" type="submit">Place Order →</button>
+      </form>
+      <div id="orderMsg" class="form-msg"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

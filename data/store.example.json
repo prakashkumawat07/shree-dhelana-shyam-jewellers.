@@ -1,0 +1,62 @@
+{
+  "users": [],
+  "orders": [],
+  "messages": [],
+  "products": [
+    {
+      "id": "gold-necklace",
+      "name": "Royal Gold Necklace",
+      "category": "Gold",
+      "price": 89999,
+      "purity": "22K",
+      "badge": "Bestseller",
+      "icon": "necklace"
+    },
+    {
+      "id": "bridal-set",
+      "name": "Bridal Heritage Set",
+      "category": "Gold",
+      "price": 129999,
+      "purity": "22K",
+      "badge": "New",
+      "icon": "bridal"
+    },
+    {
+      "id": "gold-bangles",
+      "name": "Classic Gold Bangles",
+      "category": "Gold",
+      "price": 54999,
+      "purity": "22K",
+      "badge": "Popular",
+      "icon": "bangles"
+    },
+    {
+      "id": "silver-set",
+      "name": "Italian Silver Set",
+      "category": "Silver",
+      "price": 15999,
+      "purity": "92.5",
+      "badge": "92.5 Silver",
+      "icon": "silver"
+    },
+    {
+      "id": "gold-ring",
+      "name": "Elegant Gold Ring",
+      "category": "Gold",
+      "price": 28999,
+      "purity": "18K",
+      "badge": "Trending",
+      "icon": "ring"
+    },
+    {
+      "id": "gold-earrings",
+      "name": "Temple Jhumka Earrings",
+      "category": "Gold",
+      "price": 35999,
+      "purity": "22K",
+      "badge": "Festive",
+      "icon": "earrings"
+    }
+  ],
+  "offers": []
+}

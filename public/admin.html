@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard | Shree Dhelana Shyam Jewellers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="admin-logo">ॐ</div>
+    <span class="eyebrow dark">PRIVATE AREA</span>
+    <h1>Admin Dashboard</h1>
+    <p>Manage products, pricing, discounts, orders, customers, offers and messages.</p>
+    <form class="admin-login-form" id="adminLoginForm">
+      <input name="userId" placeholder="Admin User ID" autocomplete="username" required>
+      <input name="password" type="password" placeholder="Admin password" required>
+      <button class="btn btn-gold" type="submit">Secure Login →</button>
+    </form>
+    <div class="forgot-row"><button type="button" id="forgotCredentialsBtn">Forgot User ID / Password?</button></div>
+    <p class="login-hint">User ID: <b>Prakash@9116</b> • Password: <b>Kumawat@916</b></p>
+    <div id="loginError" class="muted"></div>
+  </div>
+</div>
+
+<div class="admin-layout" id="adminApp" style="display:none">
+  <aside class="sidebar">
+    <div class="admin-brand"><div class="admin-logo">ॐ</div><div><b>श्री ढेलाणा श्याम</b><small>ADMIN PANEL</small></div></div>
+    <div class="side-label">MANAGE</div>
+    <div class="side-nav">
+      <button class="active" data-page="dashboard">📊 <span>Dashboard</span></button>
+      <button data-page="products">💎 <span>Products</span></button>
+      <button data-page="orders">📦 <span>Orders</span></button>
+      <button data-page="customers">👥 <span>Customers</span></button>
+      <button data-page="offers">🏷️ <span>Offers</span></button>
+      <button data-page="messages">✉️ <span>Messages</span></button>
+      <button data-page="settings">⚙️ <span>Admin Settings</span></button>
+      <a href="/" target="_blank">🌐 <span>View Website</span></a>
+    </div>
+    <button class="logout" id="logout">↪ <span>Logout</span></button>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-top">
+      <div><h1 id="topTitle">Dashboard</h1><small id="adminEmail"></small></div>
+      <a class="view-site" href="/" target="_blank">OPEN STORE ↗</a>
+    </header>
+
+    <div class="content">
+      <section class="page active" id="page-dashboard">
+        <div class="page-title"><div><h2>Overview</h2><p>Your jewellery store at a glance.</p></div></div>
+        <div class="stats">
+          <div class="stat gold"><small>TOTAL PRODUCTS</small><strong id="statProducts">0</strong></div>
+          <div class="stat"><small>TOTAL ORDERS</small><strong id="statOrders">0</strong></div>
+          <div class="stat"><small>CUSTOMERS</small><strong id="statCustomers">0</strong></div>
+          <div class="stat"><small>MESSAGES</small><strong id="statMessages">0</strong></div>
+          <div class="stat gold"><small>REVENUE</small><strong id="statRevenue">₹0</strong></div>
+        </div>
+        <div class="panel"><div class="panel-head"><h3>Recent Orders</h3><button class="btn btn-gold" data-page-jump="orders">View all</button></div><div id="recentOrders"></div></div>
+      </section>
+
+      <section class="page" id="page-products">
+        <div class="page-title"><div><h2>Products</h2><p>Add, update price, purity, discount and product details.</p></div><button class="btn btn-gold" id="addProductBtn">+ Add Product</button></div>
+        <div class="panel"><div id="productsTable"></div></div>
+      </section>
+
+      <section class="page" id="page-orders">
+        <div class="page-title"><div><h2>Orders</h2><p>View customer order details and update order status.</p></div></div>
+        <div class="panel"><div id="ordersTable"></div></div>
+      </section>
+
+      <section class="page" id="page-customers">
+        <div class="page-title"><div><h2>Customers</h2><p>Registered customer details.</p></div></div>
+        <div class="panel"><div id="customersTable"></div></div>
+      </section>
+
+      <section class="page" id="page-offers">
+        <div class="page-title"><div><h2>Offers & Discounts</h2><p>Create promotional offers and discount codes.</p></div><button class="btn btn-gold" id="addOfferBtn">+ Make Offer</button></div>
+        <div class="panel"><div id="offersList"></div></div>
+      </section>
+
+      <section class="page" id="page-messages">
+        <div class="page-title"><div><h2>User Messages</h2><p>Messages received from the website contact form.</p></div></div>
+        <div class="panel"><div id="messagesTable"></div></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-title"><div><h2>Admin Settings</h2><p>Change User ID, password and recovery code.</p></div></div>
+        <div class="panel settings-panel">
+          <form id="changeCredentialsForm" class="settings-form">
+            <label>Current Password<input name="currentPassword" type="password" required></label>
+            <label>New User ID<input name="newUserId" placeholder="Leave blank to keep current"></label>
+            <label>New Password<input name="newPassword" type="password" placeholder="8+ characters"></label>
+            <label>Confirm New Password<input name="confirmPassword" type="password"></label>
+            <label class="full">New Recovery Code<input name="newRecoveryCode" type="password" placeholder="8+ characters"></label>
+            <div class="form-actions"><button class="btn btn-gold" type="submit">Update Credentials</button></div>
+          </form><div id="settingsMsg" class="settings-msg"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="modal-admin" id="productModal">
+  <div class="admin-modal">
+    <button class="admin-close" data-modal="productModal">×</button>
+    <h3 id="productModalTitle">Add Product</h3>
+    <form class="product-form" id="productForm">
+      <input type="hidden" name="id">
+      <input name="name" placeholder="Product name" required>
+      <select name="category"><option>Gold</option><option>Silver</option></select>
+      <input name="price" type="number" min="0" placeholder="Price ₹" required>
+      <input name="discount" type="number" min="0" max="100" placeholder="Discount %">
+      <input name="purity" placeholder="Purity e.g. 22K">
+      <input name="badge" placeholder="Badge e.g. Bestseller">
+      <select name="icon"><option value="ring">Ring</option><option value="necklace">Necklace</option><option value="bridal">Bridal</option><option value="bangles">Bangles</option><option value="earrings">Earrings</option><option value="silver">Silver</option></select>
+      <div class="form-actions"><button type="button" class="btn" data-modal="productModal">Cancel</button><button class="btn btn-gold" type="submit">Save Product</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-admin" id="offerModal">
+  <div class="admin-modal">
+    <button class="admin-close" data-modal="offerModal">×</button>
+    <h3>Create Offer</h3>
+    <form class="offer-form" id="offerForm">
+      <input name="title" placeholder="Offer title" required>
+      <input name="discount" type="number" min="0" max="100" placeholder="Discount %">
+      <input name="code" placeholder="Coupon code e.g. GOLD10">
+      <input name="subtitle" placeholder="Short subtitle">
+      <div class="form-actions"><button type="button" class="btn" data-modal="offerModal">Cancel</button><button class="btn btn-gold" type="submit">Publish Offer</button></div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal-admin" id="recoveryModal">
+  <div class="admin-modal">
+    <button class="admin-close" data-modal="recoveryModal">×</button>
+    <h3>Forgot Admin Credentials?</h3>
+    <div class="recovery-tabs"><button class="active" data-recovery-tab="userid">Forgot User ID</button><button data-recovery-tab="password">Forgot Password</button></div>
+    <form id="recoverUserIdForm" class="recovery-form"><input name="recoveryCode" type="password" placeholder="Recovery code" required><button class="btn btn-gold">Recover User ID</button></form>
+    <form id="resetPasswordForm" class="recovery-form hidden"><input name="userId" placeholder="Admin User ID" required><input name="recoveryCode" type="password" placeholder="Recovery code" required><input name="newPassword" type="password" placeholder="New password" minlength="8" required><input name="confirmPassword" type="password" placeholder="Confirm password" minlength="8" required><button class="btn btn-gold">Reset Password</button></form>
+    <div id="recoveryMsg" class="settings-msg"></div>
+    <p class="recovery-hint">Initial recovery code: <b>Prakash-Recovery@916</b></p>
+  </div>
+</div>
+
+<div class="toast-admin" id="adminToast"></div>
+<script src="/admin.js"></script>
+</body>
+</html>

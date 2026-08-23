@@ -1,0 +1,14 @@
+{
+  "name": "shree-gelam-jewellers",
+  "version": "1.0.0",
+  "description": "A premium jewellery storefront with authentication, products, orders and contact form.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2"
+  }
+}
