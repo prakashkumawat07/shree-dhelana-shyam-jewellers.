@@ -33,7 +33,7 @@ function productVisual(p) {
   if (p.category === "Silver") shape += " silver-shape";
   return `<div class="product-visual ${cls}">
     <span class="badge">${p.badge}</span><button class="heart" aria-label="Wishlist">♡</button>
-    <div class="${shape}"></div>
+    ${p.image?`<img class="product-photo" src="${p.image}" alt="${p.name}">`:`<div class="${shape}"></div>`}
   </div>`;
 }
 
